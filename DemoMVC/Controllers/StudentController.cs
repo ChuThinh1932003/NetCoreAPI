@@ -8,5 +8,11 @@ namespace DemoMVC.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Index(string StudentId, string FullName)
+        {
+            ViewBag.message = StudentId + "-" + FullName;
+            return View();
+        }
     }
 }
