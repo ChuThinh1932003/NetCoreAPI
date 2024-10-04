@@ -18,14 +18,18 @@ namespace DemoMVC.Migrations
 
             modelBuilder.Entity("DemoMVC.Models.Entities.ChuDucThinh", b =>
                 {
-                    b.Property<string>("ChuDucThinhID")
+                    b.Property<string>("FullName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ChuDucThinhName")
+                    b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("ChuDucThinhID");
+                    b.Property<string>("MSV")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("FullName");
 
                     b.ToTable("ChuDucThinh");
                 });

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoMVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240914105151_Create_Table_ChuDucThinh")]
+    [Migration("20240928080920_Create_Table_ChuDucThinh")]
     partial class Create_Table_ChuDucThinh
     {
         /// <inheritdoc />
@@ -21,14 +21,18 @@ namespace DemoMVC.Migrations
 
             modelBuilder.Entity("DemoMVC.Models.Entities.ChuDucThinh", b =>
                 {
-                    b.Property<string>("ChuDucThinhID")
+                    b.Property<string>("FullName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ChuDucThinhName")
+                    b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("ChuDucThinhID");
+                    b.Property<string>("MSV")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("FullName");
 
                     b.ToTable("ChuDucThinh");
                 });
