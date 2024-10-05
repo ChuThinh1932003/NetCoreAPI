@@ -10,22 +10,22 @@ using DemoMVC.Models.Entities;
 
 namespace DemoMVC.Controllers
 {
-    public class ChuDucThinhController : Controller
+    public class PersonController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ChuDucThinhController(ApplicationDbContext context)
+        public PersonController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: ChuDucThinh
+        // GET: Person
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ChuDucThinh.ToListAsync());
+            return View(await _context.Person.ToListAsync());
         }
 
-        // GET: ChuDucThinh/Details/5
+        // GET: Person/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace DemoMVC.Controllers
                 return NotFound();
             }
 
-            var chuDucThinh = await _context.ChuDucThinh
-                .FirstOrDefaultAsync(m => m.FullName == id);
-            if (chuDucThinh == null)
+            var person = await _context.Person
+                .FirstOrDefaultAsync(m => m.PersonID == id);
+            if (person == null)
             {
                 return NotFound();
             }
 
-            return View(chuDucThinh);
+            return View(person);
         }
 
-        // GET: ChuDucThinh/Create
+        // GET: Person/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ChuDucThinh/Create
+        // POST: Person/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FullName,Address,MSV")] ChuDucThinh chuDucThinh)
+        public async Task<IActionResult> Create([Bind("PersonID,FullName,Address")] Person person)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(chuDucThinh);
+                _context.Add(person);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(chuDucThinh);
+            return View(person);
         }
 
-        // GET: ChuDucThinh/Edit/5
+        // GET: Person/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace DemoMVC.Controllers
                 return NotFound();
             }
 
-            var chuDucThinh = await _context.ChuDucThinh.FindAsync(id);
-            if (chuDucThinh == null)
+            var person = await _context.Person.FindAsync(id);
+            if (person == null)
             {
                 return NotFound();
             }
-            return View(chuDucThinh);
+            return View(person);
         }
 
-        // POST: ChuDucThinh/Edit/5
+        // POST: Person/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("FullName,Address,MSV")] ChuDucThinh chuDucThinh)
+        public async Task<IActionResult> Edit(string id, [Bind("PersonID,FullName,Address")] Person person)
         {
-            if (id != chuDucThinh.FullName)
+            if (id != person.PersonID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace DemoMVC.Controllers
             {
                 try
                 {
-                    _context.Update(chuDucThinh);
+                    _context.Update(person);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ChuDucThinhExists(chuDucThinh.FullName))
+                    if (!PersonExists(person.PersonID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace DemoMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(chuDucThinh);
+            return View(person);
         }
 
-        // GET: ChuDucThinh/Delete/5
+        // GET: Person/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -124,34 +124,34 @@ namespace DemoMVC.Controllers
                 return NotFound();
             }
 
-            var chuDucThinh = await _context.ChuDucThinh
-                .FirstOrDefaultAsync(m => m.FullName == id);
-            if (chuDucThinh == null)
+            var person = await _context.Person
+                .FirstOrDefaultAsync(m => m.PersonID == id);
+            if (person == null)
             {
                 return NotFound();
             }
 
-            return View(chuDucThinh);
+            return View(person);
         }
 
-        // POST: ChuDucThinh/Delete/5
+        // POST: Person/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var chuDucThinh = await _context.ChuDucThinh.FindAsync(id);
-            if (chuDucThinh != null)
+            var person = await _context.Person.FindAsync(id);
+            if (person != null)
             {
-                _context.ChuDucThinh.Remove(chuDucThinh);
+                _context.Person.Remove(person);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ChuDucThinhExists(string id)
+        private bool PersonExists(string id)
         {
-            return _context.ChuDucThinh.Any(e => e.FullName == id);
+            return _context.Person.Any(e => e.PersonID == id);
         }
     }
 }
