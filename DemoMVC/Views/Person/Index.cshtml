@@ -9,6 +9,16 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<div class="row">
+    <div class="col-md-6"></div>
+        <form class="d-flex" asp-action="Index" asp-controller="Person">
+            <input name="searchString" class="form-control me-1" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-dark" type="submit">Search by name</button>
+        </form>
+    <div class="col-md-6">
+        <a asp-action="Index" class="text-dark">Back to Full List</a>
+    </div>
+</div>
 <table class="table">
     <thead>
         <tr>
